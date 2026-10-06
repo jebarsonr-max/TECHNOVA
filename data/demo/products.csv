@@ -1,0 +1,5 @@
+product_id,product_name,category,unit_price,cost_price
+PROD-01,Enterprise Analytics Suite,Software,5000.00,1200.00
+PROD-02,Cloud Data Connector,Software,1500.00,300.00
+PROD-03,AI Model Accelerator,Software,8000.00,2000.00
+PROD-04,Dedicated Security Proxy,Hardware,3500.00,1800.00

@@ -1,0 +1,4 @@
+transaction_id,sales_amount,region,sale_date
+TXN-1,1000.00,North,2024-01-01
+TXN-2,2500.00,South,2024-01-02
+TXN-3,1800.00,West,2024-01-03

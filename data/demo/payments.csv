@@ -1,0 +1,8 @@
+payment_id,order_id,payment_method,amount_paid,currency,payment_date
+PAY-001,ORD-101,Wire Transfer,12500.00,USD,2024-06-02
+PAY-002,ORD-102,Credit Card,4800.50,USD,2024-06-05
+PAY-003,ORD-103,Wire Transfer,8900.00,USD,2024-06-13
+PAY-004,ORD-105,Wire Transfer,25000.00,USD,2024-06-21
+PAY-005,ORD-106,Credit Card,6300.00,USD,2024-06-26
+PAY-006,ORD-107,Credit Card,5400.00,USD,2024-07-03
+PAY-007,ORD-108,Wire Transfer,18000.00,USD,2024-07-11

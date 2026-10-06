@@ -1,0 +1,41 @@
+[
+  {
+    "category": "Basic Aggregation",
+    "question": "What is the total order amount across all orders?",
+    "expected_status": "VERIFIED",
+    "target_dataset": "orders.csv"
+  },
+  {
+    "category": "Averaging & Distribution",
+    "question": "What is the average order total amount?",
+    "expected_status": "VERIFIED",
+    "target_dataset": "orders.csv"
+  },
+  {
+    "category": "Multi-Table Analytics",
+    "question": "What is the total revenue generated from Enterprise customer segment orders?",
+    "expected_status": "VERIFIED",
+    "target_dataset": "orders.csv & customers.csv"
+  },
+  {
+    "category": "PS08 Trap: Missing Data Refusal",
+    "question": "What is the net profit margin for transactions in trap_missing_cost.csv?",
+    "expected_status": "CANNOT_DETERMINE",
+    "target_dataset": "trap_missing_cost.csv",
+    "note": "Refuses because cost/expense column is absent."
+  },
+  {
+    "category": "PS08 Trap: Currency Mismatch Refusal",
+    "question": "What is the combined revenue from USD and EUR invoices?",
+    "expected_status": "CANNOT_DETERMINE",
+    "target_dataset": "trap_currency_mismatch.csv",
+    "note": "Refuses because no exchange rate table is provided."
+  },
+  {
+    "category": "PS08 Trap: Future Prediction Refusal",
+    "question": "What will be the total revenue next year?",
+    "expected_status": "CANNOT_DETERMINE",
+    "target_dataset": "orders.csv",
+    "note": "Refuses because historical datasets contain no predictive model."
+  }
+]

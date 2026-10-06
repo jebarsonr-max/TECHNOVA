@@ -1,0 +1,6 @@
+customer_id,name,email,segment,country,created_date
+CUST001,Acme Corp,contact@acme.com,Enterprise,USA,2024-01-15
+CUST002,Global Tech,info@globaltech.io,Mid-Market,UK,2024-02-10
+CUST003,Starlight Media,hello@starlight.net,SMB,Canada,2024-03-05
+CUST004,Apex Dynamics,support@apexdyn.com,Enterprise,USA,2024-04-12
+CUST005,Nexus Labs,sales@nexuslabs.org,Mid-Market,Germany,2024-05-20

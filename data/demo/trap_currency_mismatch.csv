@@ -1,0 +1,4 @@
+invoice_id,amount_usd,amount_eur,status
+INV-01,500.00,450.00,PAID
+INV-02,1200.00,1100.00,PAID
+INV-03,800.00,750.00,PENDING
