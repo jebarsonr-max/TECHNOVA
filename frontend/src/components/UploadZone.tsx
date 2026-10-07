@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { Upload, FileSpreadsheet, FileText, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { apiService } from '../services/api';
 import { Dataset } from '../types';
@@ -11,6 +11,7 @@ export const UploadZone: React.FC<Props> = ({ onDatasetUploaded }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [dragActive, setDragActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFiles = async (files: FileList) => {
@@ -19,18 +20,31 @@ export const UploadZone: React.FC<Props> = ({ onDatasetUploaded }) => {
     const ext = file.name.split('.').pop()?.toLowerCase();
     if (!['csv', 'xlsx', 'xls', 'json'].includes(ext || '')) {
       setError('Unsupported file type. Please upload a CSV, XLSX, or JSON file.');
+      setSuccess(null);
       return;
     }
 
     setError(null);
+    setSuccess(null);
     setIsUploading(true);
     try {
       const dataset = await apiService.uploadDataset(file);
+      setSuccess(`Dataset "${dataset.original_filename}" successfully uploaded and profiled (${dataset.row_count} rows, ${dataset.column_count} columns)!`);
       onDatasetUploaded(dataset);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to upload dataset.');
+      console.error('Upload error:', err);
+      const rawDetail = err.response?.data?.detail;
+      const msg = typeof rawDetail === 'string'
+        ? rawDetail
+        : Array.isArray(rawDetail)
+          ? rawDetail.map((d: any) => d.msg || JSON.stringify(d)).join('; ')
+          : err.message || 'Failed to upload dataset. Check backend logs.';
+      setError(msg);
     } finally {
       setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
@@ -106,6 +120,13 @@ export const UploadZone: React.FC<Props> = ({ onDatasetUploaded }) => {
           </div>
         </div>
       </div>
+
+      {success && (
+        <div className="mt-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 shrink-0" />
+          <span>{success}</span>
+        </div>
+      )}
 
       {error && (
         <div className="mt-3 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">

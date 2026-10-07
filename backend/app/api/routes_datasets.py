@@ -77,9 +77,19 @@ def upload_dataset(file: UploadFile = File(...), db: Session = Depends(get_db)):
         db.refresh(dataset_rec)
         return dataset_rec
 
+    except ValueError as ve:
+        if os.path.exists(saved_filepath):
+            try:
+                os.remove(saved_filepath)
+            except Exception:
+                pass
+        raise HTTPException(status_code=400, detail=str(ve))
     except Exception as e:
         if os.path.exists(saved_filepath):
-            os.remove(saved_filepath)
+            try:
+                os.remove(saved_filepath)
+            except Exception:
+                pass
         raise HTTPException(status_code=500, detail=f"Failed to ingest and profile dataset: {str(e)}")
 
 @router.get("", response_model=List[DatasetSchema])

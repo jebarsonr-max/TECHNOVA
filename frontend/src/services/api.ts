@@ -1,13 +1,10 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import { Dataset, Analysis, Proof, EvidenceItem, Relationship, DemoQuestion } from '../types';
 
 const API_BASE_URL = '/api';
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 export const apiService = {
@@ -22,9 +19,7 @@ export const apiService = {
     const formData = new FormData();
     formData.append('file', file);
     const res = await apiClient.post<Dataset>('/datasets/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+      headers: { 'Content-Type': undefined }, // Let browser auto-set multipart/form-data with boundary
     });
     return res.data;
   },
